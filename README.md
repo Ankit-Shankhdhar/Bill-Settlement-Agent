@@ -46,18 +46,3 @@ If you open the frontend with VS Code Live Server at
 <http://127.0.0.1:5500>, keep `python web_app.py` running on port 8000. The
 frontend automatically sends API requests to the Python server.
 
-## An honest failure
-
-While building this, `settle_up()` crashed every single time it was called.
-The method was written as `self.get_expenses()`, but `get_expenses()` only
-exists on the `BillMemory` object, not on `BillTools` itself — a copy-paste
-mistake from writing `add_share` (which does have direct access to
-`self.memory`) right before it. It wasn't caught immediately because the
-tools were never tested in isolation before wiring them to the model, so the
-first sign of trouble was a tool-call failure buried in an LLM conversation,
-which is a much harder place to debug than a plain function call. The fix
-was two-fold: correct the call to `self.memory.get_expenses()`, and add a
-standalone `demo.py` / `demo_notebook.ipynb` that exercises every tool
-function directly, with no model involved, before ever testing them through
-the agent. That same "test the tool, then test the agent" order is why the
-notebook demo below runs the tools directly first.

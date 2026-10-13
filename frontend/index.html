@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Settlewise — an AI-powered bill splitter that calculates fair shares and settlement plans for shared expenses.">
+    <title>Settlewise | AI Bill Splitter</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <a class="brand" href="/frontend/index.html" aria-label="Settlewise home">
+          <span class="brand-mark">₹</span>
+          <span>
+            <strong>Settlewise</strong>
+            <small>AI bill splitter</small>
+          </span>
+        </a>
+        <button id="reset-button" class="button button-ghost" type="button">New bill</button>
+      </header>
+
+      <!-- Hero -->
+      <section class="hero" aria-label="Introduction">
+        <div>
+          <p class="eyebrow">Shared expenses, simplified</p>
+          <h1>Everyone pays their fair share.</h1>
+          <p class="hero-copy">Tell the agent who paid, then ask it to settle everything. Your bill stays in this browser session.</p>
+        </div>
+        <div class="hero-orb" aria-hidden="true"><span>₹</span></div>
+      </section>
+
+      <!-- Main Dashboard -->
+      <section class="dashboard" aria-label="Bill dashboard">
+
+        <!-- Chat Panel -->
+        <div class="panel chat-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Assistant</p>
+              <h2>Conversation</h2>
+            </div>
+            <span id="status" class="status"><i></i> Ready</span>
+          </div>
+
+          <div id="chat" class="chat" aria-live="polite" aria-label="Chat messages">
+            <div class="message assistant">
+              <div class="avatar" aria-hidden="true">S</div>
+              <div class="bubble">Hi! Tell me who paid and how much. When you're ready, say <strong>"settle everything"</strong>.</div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="composer" aria-label="Send a message">
+            <input
+              id="message-input"
+              name="message"
+              autocomplete="off"
+              placeholder="e.g. Rahul paid ₹900 for dinner"
+              maxlength="1000"
+              required
+              aria-label="Message input"
+            >
+            <button class="send-button" type="submit" aria-label="Send message">↑</button>
+          </form>
+
+          <div class="suggestions" aria-label="Quick prompts">
+            <button type="button" data-prompt="Rahul paid ₹900 for dinner.">Rahul paid ₹900</button>
+            <button type="button" data-prompt="Aman paid ₹600 for dinner.">Aman paid ₹600</button>
+            <button type="button" data-prompt="Settle everything.">Settle everything</button>
+          </div>
+        </div>
+
+        <!-- Side Column -->
+        <aside class="side-column">
+
+          <!-- Overview Panel -->
+          <div class="panel summary-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Overview</p>
+                <h2>This bill</h2>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric-card">
+                <span>Total paid</span>
+                <strong id="total">₹0.00</strong>
+              </div>
+              <div class="metric-card">
+                <span>People</span>
+                <strong id="people-count">0</strong>
+              </div>
+              <div class="metric-card">
+                <span>Fair share</span>
+                <strong id="fair-share">₹0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payments Panel -->
+          <div class="panel payments-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Activity</p>
+                <h2>Payments</h2>
+              </div>
+            </div>
+            <div id="payments" class="payments empty">Payments will appear here.</div>
+          </div>
+
+          <!-- Settlement Panel -->
+          <div class="panel settlement-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Next step</p>
+                <h2>Settlement plan</h2>
+              </div>
+            </div>
+            <div id="settlements" class="settlements empty">Ask the agent to settle the bill.</div>
+          </div>
+
+          <!-- History Panel -->
+          <div class="panel history-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Archive</p>
+                <h2>Bill history</h2>
+              </div>
+            </div>
+            <div id="history" class="history empty">Your completed bills will appear here.</div>
+          </div>
+
+        </aside>
+      </section>
+
+      <footer>Powered by your Bill Splitter Agent &middot; INR</footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
